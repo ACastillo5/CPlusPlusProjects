@@ -65,6 +65,7 @@ class Player {
         return this->coins;
     }
     
+    // Good
     void increaseThrist(int val){
         this->thirst = this->thirst + val;
         if(this->thirst > MAX_THIRST) this->thirst = MAX_THIRST;
@@ -75,9 +76,21 @@ class Player {
         if(this->hunger > MAX_HUNGER) this->hunger = MAX_HUNGER;
     }
     
+    
     void increaseCoins(int val){
         this->coins += val;
         if(this->coins > MAX_COINS) this->coins = MAX_COINS;
+    }
+    
+    // Bad
+    void decreaseThrist(int val){
+        this->thirst = this->thirst - val;
+        if(this->thirst > MAX_THIRST) this->thirst = MAX_THIRST;
+    }
+    
+    void decreaseHunger(int val){
+        this->hunger -= val;
+        if(this->hunger > MAX_HUNGER) this->hunger = MAX_HUNGER;
     }
     
     void loseCoins(int val){
@@ -189,7 +202,11 @@ class Lake : public Land {
         
         cout << "You see something shiny at the bottom of the lake." << endl;
         
+        sleep(2);
+        
         cout << "The lake is " << lakeDeepness << " feet deep." << endl;
+        
+        sleep(2);
         
         if (lakeDeepness <= 10){
             cout << "Doesn't seem that deep" << endl;
@@ -309,29 +326,38 @@ class KingCrowd : public Land {
        char choice;
        
         if(randomNum <= 10){ //When the user hears the name
+            sleep(2);
             cout << "...You overhear the name Jerry Lawler..." << endl;
             sleep(2);
             
             cout << "You approach them and they turn around..." << endl;
+            sleep(2);
             cout << "The king asks you to address him and kneel to him" << endl;
             
             sleep(2);
+            
+            cout << "What do you do?" << endl;
+            sleep(1);
        
             cout << "[A] Kneel and address the name that you overheard" << endl;
             cout << "[B] Kneel and don't address the name" << endl;
             cout << "[C] Don't kneel and address his name" << endl;
             cout << "[D] Do nothing" << endl;
-            cout << "What do you do?" << endl;
             
             cin >> choice;
             
             switch(choice){
                 case 'A': //Kneel and Address
                     cout << "'Finally, someone who has class' King Lawler says to you" << endl;
+                    sleep(2);
+                    
                     player.increaseHunger(2);
                     player.increaseThrist(2);
                     player.increaseCoins(20);
-                    return "'You look a little skinny, tell you what have some food and water as a reward for your kindness\nYou actually caught me on a good day, Have 20 coins'";
+                    cout << "'You look a little skinny, tell you what have some food and water as a reward for your kindness" << endl;
+                    
+                    sleep(2);
+                    return "You actually caught me on a good day, Have 20 coins'";
                     break;
                 case 'B': // Only Kneel
                     cout << "'Well, tha-" << endl;
@@ -375,7 +401,9 @@ class KingCrowd : public Land {
                     sleep(2);
                     player.takeDamage(2);
                     player.loseCoins(10);
-                    cout << "'You must be a jester! Do as I sa- You know what? I have no time to wait! Men! Let's run this fopdoodle over!'\nThey run you over with their horses! Ouch!" << endl;
+                    cout << "'You must be a jester! Do as I sa- You know what? I have no time to wait! Men! Let's run this fopdoodle over!'" << endl;
+                    sleep(3);
+                    cout << "They run you over with their horses! Ouch!" << endl;
                     sleep(2);
                     cout << "You blackout." << endl;
                     sleep(2);
@@ -458,7 +486,9 @@ class KingCrowd : public Land {
                     sleep(2);
                     player.takeDamage(2);
                     player.loseCoins(10);
-                    cout << "'You must be a jester! Do as I sa- You know what? I have no time to wait! Men! Let's run this fopdoodle over!'\nThey run you over with their horses! Ouch!" << endl;
+                    cout << "'You must be a jester! Do as I sa- You know what? I have no time to wait! Men! Let's run this fopdoodle over!'" << endl;
+                    sleep(3);
+                    cout << "They run you over with their horses! Ouch!" << endl;
                     sleep(2);
                     cout << "You blackout." << endl;
                     sleep(2);
@@ -473,7 +503,7 @@ class KingCrowd : public Land {
                     sleep(2);
                     cout << "." << endl;
                     sleep(2);
-                    return "'You dare call me that?!?!? You Mandrake mymmerkin! That type of behaviour is forbidden! Off with your head!' Lawler screechs with a disgusted attitude";
+                    return "'You dare call me that?!?!? You Mandrake mymmerkin! That type of behaviour is forbidden! Off with your head!' the man with the crown screechs with a disgusted attitude";
                     break;
                 default:
                     break;
@@ -496,8 +526,11 @@ class WalkingShop : public Land {
         
         char choice;
         
-        sleep(2);
-        cout << "You walk over towards him and he says...\n'Howdy!'" << endl;
+        sleep(1);
+        cout << "You walk over towards him and he says..." << endl;
+        
+        sleep(1);
+        cout << "'Howdy!'" << endl;
         sleep(2);
         cout << "Before you could even respond, he takes off his backpack and lays out all of his inventory" << endl;
         
@@ -514,6 +547,10 @@ class WalkingShop : public Land {
             sleep(2);
             cout << "wait a minute...You have money, right?" << endl;
             
+            sleep(2);
+            
+            cout << "How do you respond?" << endl;
+            sleep(1);
             cout << "[Y] Yes\nor\n[N] No" << endl;
             cin >> choice;
             
@@ -538,6 +575,12 @@ class WalkingShop : public Land {
             sleep(2);
     
             cout << "You have: " << player.Amount() << " Coins" << endl;
+            
+            sleep(2);
+            
+            cout << "What shall you buy?" << endl;
+            
+            sleep(1);
             cout << "[A] Piece of Bread: 2 Coins" << endl;
             cout << "[B] Bottle of Water: 3 Coins" << endl;
             cout << "[C] Cake: 10 Coins" << endl;
@@ -588,7 +631,7 @@ class WalkingShop : public Land {
                     if (player.Amount() < 15){
                         player.takeDamage(2);
                         sleep(2);
-                        return "'...Dude...come on...you ain't got the mula to buy this...Get outta here!' Beedle whispers as he gives you kicks you right on your face";
+                        return "'...Dude...come on...you ain't got the mula to buy this...Get outta here!' Beedle says as he gives you kicks you right on your face";
                     }
                     else{
                         player.loseCoins(15);
@@ -600,7 +643,13 @@ class WalkingShop : public Land {
                     if (player.Amount() < 50){
                         player.takeDamage(2);
                         player.loseCoins(99);
-                        cout << "'HOLD IT! That is my most expensive item! You do NOT have the coins to get that so Get outta here!' Beedle screams as he picks you up and slams you on the ground! That's gotta leave a mark!" << endl;
+                        sleep(1);
+                        cout << "'HOLD IT! That is my most expensive item! You do NOT have the coins to get that so... " << endl;
+                        
+                        sleep(2);
+                        cout << "'Get outta here!' Beedle screams as he picks you up and slams you on the ground! That's gotta leave a mark!" << endl;
+                        
+                        sleep(3);
                         return "You black out and when you wake up you realize he has stolen all your coins!";
                     }
                     else{
@@ -613,6 +662,7 @@ class WalkingShop : public Land {
                     break;
                 case 'F': // Rob Him
                     player.takeDamage(3);
+                    sleep(2);
                     return "As you try to snatch one of the items, he immediately grabs your arm and barks 'No one steals from me!' as gives you a right hook that feels like Mike Tyson just punched you.";
                     break;
                 default:
@@ -665,9 +715,9 @@ class FiddleMan : public Land {
             sleep(1);
             cout << "[A] Yawn without a care in the world" << endl;
             cout << "[B] Explain why you yawn " << endl;
-            cout << "[C] Hold in the yawn with all your might" << endl; // He finishes the song and thanks you by giving you coins
-            cout << "[D] Yawn, but cover it up by sounding like you are singing like you're in an Opera" << endl; // He stops playing and says that was kinda weird, please get away from me
-        
+            cout << "[C] Hold in the yawn with all your might" << endl; 
+            cout << "[D] Yawn, but cover it up by sounding like you are singing like you're in an Opera" << endl;
+            
             cin >> choice;
             
             switch(choice){
@@ -675,13 +725,18 @@ class FiddleMan : public Land {
                     player.takeDamage(1);
                     cout << "You yawn" << endl;
                     sleep(2);
-                    return "'Ok, I know the fiddle isn't the most interesting instrument, but did you really have to yawn? That really hurt me deep'\nJohnny pauses then out of nowhere he gives you a strike on the head";
+                    cout << "'Ok, I know the fiddle isn't the most interesting instrument, but did you really have to yawn? That really hurt me deep' "<< endl;
+                    sleep(3);
+                    return "Johnny pauses then out of nowhere he gives you a strike on the head";
                     break;
                 case 'B': // Yawn with explanation
                     player.takeDamage(1);
                     cout << "You yawn, but before he reprimands you, you explain why you yawned" << endl;
                     sleep(2);
-                    cout << "'Oh, you're tired' He says using air quotes.\n'A likely story, why can't you just be honest with me?'" << endl;
+                    cout << "'Oh, you're...tired' He says using air quotes." << endl;
+                    sleep(2);
+                    cout << "'A likely story, why can't you just be honest with me?'" << endl;
+                    sleep(2);
                     return "Before you could respond, he clocks you over the head and shoves you away";
                     break;
                 case 'C': // Trying not to yawn
@@ -702,14 +757,18 @@ class FiddleMan : public Land {
                         player.increaseThrist(1);
                         cout << "You successfully stop from yawning!" << endl;
                         sleep(2);
-                        cout << "Wow, when I play my fiddle, people usually yawn. To reward you, here you go" << endl;
-                        return "He gives you a Bo-Berry biscuit and a cup of sweet-tea.\nRefreshing!";
+                        cout << "'Wow, when I play my fiddle, people usually yawn. To reward you, here you go'" << endl;
+                        sleep(2);
+                        cout << "He gives you a Bo-Berry biscuit and a cup of sweet-tea." << endl;
+                        sleep(1);
+                        return "Refreshing!";
                     }
                     break;
                 case 'D': // Yawn Opera Singing
                     player.increaseCoins(2);
                     sleep(2);
                     cout << "Wow, that was a weird addition to my fiddle playing...ummm...i'm gonna pay you to never do that again" << endl;
+                    sleep(2);
                     return "He gives you two coins! Cha-ching!";
                     break;
                 default:
@@ -796,7 +855,9 @@ class TreasureChest : public Land {
         }
             
         else{
-            return "Really? It's a treasure chest.\nFine, it's your choice...a weird one, but that's on you.";
+            cout << "Really? It's a treasure chest." << endl;
+            sleep(2);
+            return "Fine, it's your choice...a weird one, but that's on you.";
             }
         
         
@@ -805,29 +866,360 @@ class TreasureChest : public Land {
 };
 
 // 8
-//class LemonadeStand : public Land {};
-    //A  little stand that says "Lemonade!"\nYou see a little girl with a woman that looks like she is in her late 20s maybe her aunt in the stand
-    // random price of coins from 1-10 coins
-        //No money? She starts screaming with a screech that breaks the sound barrier
-        //What would you like to do?
-            //A: Buy it like normal
-                //'Thank you, please come again sometime' she says as she waves you goodbye
-            //B: Bargain
-                //'Dude, are you seriously gonna bargain with a little girl?' The aunt says disappointedly
-            //C: Steal the lemonade
-                //She calls for someone named Megan, you look behind you and when you look forward again
-                //a lifelike robot doll and she says "give the lemonade back" with her robot eyebrows furrowing
-                    //A: You are scared and give the lemonade back
-                    //B: Run away again
-                        //The robot doll runs towards you on all fours and you run through a densley forest and you feel that you are safe
-                        //You look around and nothing seems to be there, but then you see the robot lunge towards you and you have a quick choice to make
-                        //A: Throw the lemonade at the robot
-                            //The lemonade seems to get into her circuits and she malfunctions and you finally are able to successfully flee
-                        //B: Dodge out of the way
-                            //You will always fail to dodge
-
-
-
+class LemonadeStand : public Land {
+    public:
+    string getDescription(){
+        return " a little lemonade stand with a little girl with a woman that looks like she is in her late 20s (maybe her aunt) in the stand\n";
+    }
+    
+    int price = (rand() % 11) + 1;
+    int freeChance = rand() % 100;
+    
+    char choice;
+    char LemonChoice;
+    char RobotChoice;
+    
+    string visit(Player& player){
+        cout << "'Welcome to Cady' the little girl says" << endl;
+        sleep(2);
+        cout << "'and Gemma's' the older woman says" << endl;
+        sleep(2);
+        cout << "'Lemonade Stand!' they say in unison" << endl; 
+        sleep(2);
+        cout << "'Our lemonade is only " << price << " coins!' " << endl;
+        
+        sleep(2);
+        cout << "Out of the corner of your eye you see something peaking at you behind a tree, looked like a small person" << endl;
+        sleep(2);
+        cout << "As soon as you look at it, it hides behind the tree" << endl;
+        
+        if (player.Amount() < price){
+            sleep(1);
+            cout << "'Would you like to buy our lemonade?'" << endl;
+            sleep(2);
+            
+            cout << "'Uh oh' you say to yourself, due to the fact that you don't have enough coins to pay for the lemonade" << endl;
+            sleep(2);
+            
+            cout << "What do you do?" << endl;
+            sleep(1);
+            cout << "[A] Tell the truth" << endl;
+            cout << "[B] Steal one of the lemonade cups and bolt off" << endl;
+            cout << "[C] Run away" << endl;
+            cout << "[D] Bargain" << endl;
+            
+            cin >> choice;
+            
+            switch(choice){
+                case 'A': // Truth
+                    
+                    if (freeChance <= 30){
+                        player.increaseThrist(2);
+                        sleep(2);
+                        return "'That's ok sir, we will give you one on the house' Cady gleefully says as she hands you a cup filled to the brim with lemonade";
+                    }
+                    else{
+                        player.takeDamage(1);
+                        sleep(2);
+                        cout << "For some reason, Gemma puts on noise cancelling headphones" << endl;
+                        sleep(2);
+                        cout << "Then Cady lets out a scream that was so loud, you feel that even people on the moon could hear it!" << endl;
+                        sleep(2);
+                        return "You leave with some hearing damage";
+                    }
+                    break;
+                case 'B': // Steal Lemonade and run
+                
+                    sleep(1);
+                    
+                    cout << "As you you run away, you hear Cady yell out 'Megan! They are st'...and you didn't really hear the rest as her voice is getting farther and farther away" << endl;
+                    sleep(4);
+                    
+                    cout << "You finally stop running as you feel safe as you hide behind a huge boulder to catch your breath" << endl;
+                    sleep(3);
+                    
+                    cout << "'Give me. The lemonade' A weird voice that sounds like a mix between a young girl and a AI voice right behind you" << endl;
+                    sleep(3);
+                    cout << "You slowly look behind you preparing for the worst" << endl;
+                    sleep(1);
+                    cout << "." << endl;
+                    sleep(1);
+                    cout << "." << endl;
+                    sleep(2);
+                    cout << "As you are almost fully turned around, you see that it looks like a doll, a robot doll" << endl;
+                    
+                    sleep(3);
+                    cout << "She is staring through you soul with furrowed eyebrows and says 'Well? I'm waiting' as her robotic arm stretches out and slowly opens her hand" << endl;
+                    
+                    sleep(3);
+                    cout << "What do you do this time?" << endl;
+                    sleep(1);
+                    cout << "[A] Give up and give the lemonade back" << endl;
+                    cout << "[B] Bolt off with all the energy you have left" << endl;
+                    
+                    cin >> LemonChoice;
+                    
+                    switch(LemonChoice){
+                        case 'A': // Give up
+                            player.decreaseHunger(1);
+                            player.decreaseThrist(1);
+                            
+                            sleep(2);
+                            cout << "You are terrified by what it can do to you, so you give it back" << endl;
+                            sleep(2);
+                            cout << "The robot-like doll gives you one last angry look and walks away" << endl;
+                            sleep(2);
+                            return "You are left feeling horrified out of your mind and because of all that running you feel hungrier and thirstier";
+                            break;
+                        case 'B': // Bolt off again
+                            sleep(2);
+                            cout << "You slowly get up, her robotic eyes following you and still with the same angry look, and pretend like you are giving it and then bolt off again!" << endl;
+                            
+                            sleep(4);
+                            cout << "You are running with all you got and you are starting to get more and more tired, so you look behind you to see if she is running towards you and..." << endl;
+                            
+                            sleep(4);
+                            cout << "Your eyes widen as you see that she is running towards you on all fours!" << endl;
+                            
+                            sleep(2);
+                            cout << "She is gaining on you and then you trip over a tree root and she lunges towards you!" << endl;
+                            
+                            sleep(3);
+                            cout << "How do you react to this?" << endl;
+                            sleep(1);
+                            cout << "[A] Throw the lemonade right at her" << endl;
+                            cout << "[B] Dodge out of the way" << endl;
+                            
+                            cin >> RobotChoice;
+                            
+                            switch(RobotChoice){
+                                case 'A': // Throw lemonade
+                                    player.decreaseHunger(2);
+                                    player.decreaseThrist(2);
+                                    
+                                    sleep(1);
+                                    cout << "You throw the lemonade and it stops in path and it starts glitching and sparks start flying" << endl;
+                                    
+                                    sleep(2);
+                                    cout << "You move out of the way as the robot doll lays face down just twitching" << endl;
+                                    
+                                    sleep(2);
+                                    return "You are left feeling petrified, parched, and your stomach aching";
+                                    
+                                    break;
+                                case 'B': // Dodge
+                                    player.takeDamage(3);
+                                    player.decreaseHunger(2);
+                                    player.decreaseThrist(2);
+                                    
+                                    sleep(1);
+                                    cout << "You try to dodge out of the way, but you are too slow for the robot" << endl;
+                                    
+                                    sleep(2);
+                                    cout << "'Should've just given the lemonade back' she says as she starts to choke you out and your vision starts to fade" << endl;
+                                    
+                                    sleep(4);
+                                    return "";
+                                    
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    break;
+                case 'C': // Run away
+                    sleep(1);
+                    cout << "Without saying a word, you just bolt off!" << endl;
+                    sleep(1);
+                    cout << "From a distance, you hear Gemma yell 'You could have at least given her at least some money!'" << endl;
+                    
+                    sleep(2);
+                    return "She kinda does make a point, you left a girl feeling sad and without even giving a single coin";
+                    
+                    break;
+                case 'D': // Bargain
+                    player.takeDamage(1);
+                
+                    cout << "'Wha- Are you seriously bargaining over lemonade?' Gemma says with a disgusted look" << endl;
+                    sleep(2);
+                    cout << "'Get out of here!' she yells" << endl;
+                    sleep(2);
+                    
+                    return "Before you start to walk away, she hits you on the side of your head with a mean punch";
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+        
+        else{
+            sleep(1);
+            cout << "'Would you like to buy our lemonade?'" << endl;
+            sleep(2);
+            
+            cout << "What do you do?" << endl;
+            sleep(1);
+            cout << "[A] Buy some lemonade" << endl;
+            cout << "[B] Steal one of the lemonade cups and bolt off" << endl;
+            cout << "[C] Run away" << endl;
+            cout << "[D] Ask about hidden figure" << endl;
+            
+            cin >> choice;
+            
+            switch(choice){
+                case 'A':
+                    player.loseCoins(price);
+                    player.increaseThrist(1);
+                    
+                    cout << "'Thank you! Have a great day!' they both say in unison." << endl;
+                    sleep(1);
+                    cout << "As you are walking away, you overhear Gemma say 'Are you sure that Megan should be here?'\n";
+                    
+                    sleep(2);
+                    return "Hm. Weird...";
+                    
+                    break;
+                case 'B': // Steal Lemonade and run
+                    
+                    cout << "As you you run away, you hear Cady yell out 'Megan! They are st'...and you didn't really hear the rest as her voice is getting farther and farther away" << endl;
+                    sleep(4);
+                    
+                    cout << "You finally stop running as you feel safe as you hide behind a huge boulder to catch your breath" << endl;
+                    sleep(3);
+                    
+                    cout << "'Give me. The lemonade' A weird voice that sounds like a mix between a young girl and a AI voice right behind you" << endl;
+                    sleep(3);
+                    cout << "You slowly look behind you preparing for the worst" << endl;
+                    sleep(1);
+                    cout << "." << endl;
+                    sleep(1);
+                    cout << "." << endl;
+                    sleep(2);
+                    cout << "As you are almost fully turned around, you see that it looks like a doll, a robot doll" << endl;
+                    
+                    sleep(3);
+                    cout << "She is staring through you soul with furrowed eyebrows and says 'Well? I'm waiting' as her robotic arm stretches out and slowly opens her hand" << endl;
+                    
+                    sleep(3);
+                    cout << "What do you do this time?" << endl;
+                    sleep(1);
+                    cout << "[A] Give up and give the lemonade back" << endl;
+                    cout << "[B] Bolt off with all the energy you have left" << endl;
+                    
+                    cin >> LemonChoice;
+                    
+                    switch(LemonChoice){
+                        case 'A': // Give up
+                            player.decreaseHunger(1);
+                            player.decreaseThrist(1);
+                            
+                            sleep(2);
+                            cout << "You are terrified by what it can do to you, so you give it back" << endl;
+                            sleep(2);
+                            cout << "The robot-like doll gives you one last angry look and walks away" << endl;
+                            sleep(2);
+                            return "You are left feeling horrified out of your mind and because of all that running you feel hungrier and thirstier";
+                            break;
+                        case 'B': // Bolt off again
+                            sleep(2);
+                            cout << "You slowly get up, her robotic eyes following you and still with the same angry look, and pretend like you are giving it and then bolt off again!" << endl;
+                            
+                            sleep(4);
+                            cout << "You are running with all you got and you are starting to get more and more tired, so you look behind you to see if she is running towards you and..." << endl;
+                            
+                            sleep(4);
+                            cout << "Your eyes widen as you see that she is running towards you on all fours!" << endl;
+                            
+                            sleep(2);
+                            cout << "She is gaining on you and then you trip over a tree root and she lunges towards you!" << endl;
+                            
+                            sleep(3);
+                            cout << "How do you react to this?" << endl;
+                            sleep(1);
+                            cout << "[A] Throw the lemonade right at her" << endl;
+                            cout << "[B] Dodge out of the way" << endl;
+                            
+                            cin >> RobotChoice;
+                            
+                            switch(RobotChoice){
+                                case 'A': // Throw lemonade
+                                    player.decreaseHunger(2);
+                                    player.decreaseThrist(2);
+                                    
+                                    sleep(1);
+                                    cout << "You throw the lemonade and it stops in path and it starts glitching and sparks start flying" << endl;
+                                    
+                                    sleep(2);
+                                    cout << "You move out of the way as the robot doll lays face down just twitching" << endl;
+                                    
+                                    sleep(2);
+                                    return "You are left feeling petrified, parched, and your stomach aching";
+                                    
+                                    break;
+                                case 'B': // Dodge
+                                    player.takeDamage(3);
+                                    player.decreaseHunger(2);
+                                    player.decreaseThrist(2);
+                                    
+                                    sleep(1);
+                                    cout << "You try to dodge out of the way, but you are too slow for the robot" << endl;
+                                    
+                                    sleep(2);
+                                    cout << "'Should've just given the lemonade back' she says as she starts to choke you out and your vision starts to fade" << endl;
+                                    
+                                    sleep(4);
+                                    return "";
+                                    
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    break;
+                case 'C': // Run away
+                    sleep(1);
+                    cout << "Without saying a word, you just bolt off!" << endl;
+                    sleep(1);
+                    cout << "From a distance, you hear Gemma yell 'You could have at least given her at least some money!'" << endl;
+                    
+                    sleep(2);
+                    return "She kinda does make a point, you left a girl feeling sad and without even giving a single coin";
+                    
+                    break;
+                case 'D': // Ask about hidden figure
+                    cout << "'What figure?' Gemma says as she has a weird look in her eye" << endl;
+                    sleep(1);
+                    cout << "'Yeah, we don't know what you are talking about' Cady chimes in" << endl;
+                    sleep(1);
+                    cout << "'You know what, I j-just realized we are out of l-lemonade' Gemma stutters as she pours out all of the lemonade onto the ground" << endl;
+                    sleep(1);
+                    cout << "'Have a great day sir!' They both say quickly as they turn you away from the tree and push you away";
+                    
+                    sleep(3);
+                    
+                    return "...Weird";
+                    break;
+                default:
+                    break;
+            }
+            
+            
+        }
+        
+        }
+    
+};
 
 const int MAP_SIZE = 10;
 Land* map[MAP_SIZE][MAP_SIZE];
@@ -836,7 +1228,7 @@ void populateMap(){
     for(int i = 0; i < MAP_SIZE; i++){
         for(int j = 0; j < MAP_SIZE; j++){
             // TO DO: Modify this code to add your new land types
-            int randomNum = rand() % 7;
+            int randomNum = rand() % 8;
             switch(randomNum){
                 case 0: // Forest
                     map[i][j] = new Forest;
@@ -850,15 +1242,18 @@ void populateMap(){
                 case 3: // King Interaction
                     map[i][j] = new KingCrowd;
                     break;
-                case 4: // Traveling Merchant
+                case 4: // Walking Shop
                     map[i][j] = new WalkingShop;
                     break;
-                case 5: // Traveling Merchant
+                case 5: // Johnny The Fiddle Man
                     map[i][j] = new FiddleMan;
                     break;
-                case 6: // Traveling Merchant
+                case 6: // Treasure Chest
                     map[i][j] = new TreasureChest;
-                    break;    
+                    break;
+                case 7: // Lemonade Stand
+                    map[i][j] = new LemonadeStand;
+                    break;
                 default:
                     cout << "Invalid land type selected" << endl;
                     break;
@@ -874,37 +1269,61 @@ int main(){
     
     Player player(MAP_SIZE/2, MAP_SIZE/2);
     
-    cout << "You wake up and find yourself lost in the middle of a strange wilderness.\n" << endl;
+    cout << "You wake up and find yourself lost in the middle of a strange wilderness with 5 coins in your wallet.\n" << endl;
     
     // TODO: Handle boundary conditions (e.g., if index out of bounds north, you index the south-most location)
     
     while(player.isAlive()){
         sleep(3);
-        if (player.y == 0){
-            cout << "To the north: You see " << map[player.x][10]->getDescription() << endl;
+        if (player.x == 0 &&  player.y == 0){ // Far West and Far South
+            cout << "To the north: You see " << map[player.x][9]->getDescription() << endl;
             cout << "To the east: You see " << map[player.x + 1][player.y]->getDescription() << endl;
             cout << "To the south: You see " << map[player.x][player.y + 1]->getDescription() << endl;
+            cout << "To the west: You see " << map[9][player.y]->getDescription() << endl;
+        }
+        else if (player.x == 0 &&  player.y == 9){ //Far West and Far North
+            cout << "To the north: You see " << map[player.x][player.y - 1]->getDescription() << endl;
+            cout << "To the east: You see " << map[player.x + 1][player.y]->getDescription() << endl;
+            cout << "To the south: You see " << map[player.x][0]->getDescription() << endl;
+            cout << "To the west: You see " << map[9][player.y]->getDescription() << endl;
+        }
+        else if (player.x == 9 &&  player.y == 9){ //Far East and Far North
+            cout << "To the north: You see " << map[player.x][player.y - 1]->getDescription() << endl;
+            cout << "To the east: You see " << map[0][player.y]->getDescription() << endl;
+            cout << "To the south: You see " << map[player.x][0]->getDescription() << endl;
             cout << "To the west: You see " << map[player.x - 1][player.y]->getDescription() << endl;
         }
-        else if (player.x == 10){
-            cout << "To the north: You see " << map[player.x][player.y - 1]->getDescription() << endl;
+        else if (player.x == 9 &&  player.y == 0){ //Far East and Far South
+            cout << "To the north: You see " << map[player.x][9]->getDescription() << endl;
             cout << "To the east: You see " << map[0][player.y]->getDescription() << endl;
             cout << "To the south: You see " << map[player.x][player.y + 1]->getDescription() << endl;
             cout << "To the west: You see " << map[player.x - 1][player.y]->getDescription() << endl;
         }
-        else if (player.y == 10){
+        else if (player.y == 0){ // Only Far South
+            cout << "To the north: You see " << map[player.x][9]->getDescription() << endl;
+            cout << "To the east: You see " << map[player.x + 1][player.y]->getDescription() << endl;
+            cout << "To the south: You see " << map[player.x][player.y + 1]->getDescription() << endl;
+            cout << "To the west: You see " << map[player.x - 1][player.y]->getDescription() << endl;
+        }
+        else if (player.y == 9){ // Only Far North
             cout << "To the north: You see " << map[player.x][player.y - 1]->getDescription() << endl;
             cout << "To the east: You see " << map[player.x + 1][player.y]->getDescription() << endl;
             cout << "To the south: You see " << map[player.x][0]->getDescription() << endl;
             cout << "To the west: You see " << map[player.x - 1][player.y]->getDescription() << endl;
         }
-        else if (player.x == 0){
+        else if (player.x == 9){ // Only Far East
+            cout << "To the north: You see " << map[player.x][player.y - 1]->getDescription() << endl;
+            cout << "To the east: You see " << map[0][player.y]->getDescription() << endl;
+            cout << "To the south: You see " << map[player.x][player.y + 1]->getDescription() << endl;
+            cout << "To the west: You see " << map[player.x - 1][player.y]->getDescription() << endl;
+        }
+        else if (player.x == 0){ // Only Far West
             cout << "To the north: You see " << map[player.x][player.y - 1]->getDescription() << endl;
             cout << "To the east: You see " << map[player.x + 1][player.y]->getDescription() << endl;
             cout << "To the south: You see " << map[player.x][player.y + 1]->getDescription() << endl;
-            cout << "To the west: You see " << map[10][player.y]->getDescription() << endl;
+            cout << "To the west: You see " << map[9][player.y]->getDescription() << endl;
         }
-        else{
+        else{ // None of the above
             cout << "To the north: You see " << map[player.x][player.y - 1]->getDescription() << endl;
             cout << "To the east: You see " << map[player.x + 1][player.y]->getDescription() << endl;
             cout << "To the south: You see " << map[player.x][player.y + 1]->getDescription() << endl;
@@ -918,23 +1337,23 @@ int main(){
         switch(userInput){
             case 'N':
                 if (player.y == 0){
-                    player.y = player.y + 10;
+                    player.y = player.y + 9;
                 }
                 else{
                     player.y = player.y - 1;
                 }
                 break;
             case 'E':
-                if (player.x == 10){
-                    player.x = player.x - 10;
+                if (player.x == 9){
+                    player.x = player.x - 9;
                 }
                 else{
                     player.x = player.x + 1;
                 }
                 break;
             case 'S':
-                if (player.y == 10){
-                    player.y = player.y - 10;
+                if (player.y == 9){
+                    player.y = player.y - 9;
                 }
                 else{
                     player.y = player.y + 1;
@@ -942,7 +1361,7 @@ int main(){
                 break;
             case 'W':
                 if (player.x == 0){
-                    player.x = player.x + 10;
+                    player.x = player.x + 9;
                 }
                 else{
                     player.x = player.x - 1;
